@@ -11,19 +11,17 @@ import (
 	"github.com/pocketbase/pocketbase/models"
 )
 
-type DB interface{}
-
-type pb struct {
+type DB struct {
 	app *pocketbase.PocketBase
 	dao *daos.Dao
 }
 
-func NewDB() DB {
-	db := &pb{}
+func NewDB() *DB {
+	db := &DB{}
 	db.app = pocketbase.New()
+	db.app.Bootstrap()
 
 	serveCommand := cmd.NewServeCommand(db.app, false)
-	db.app.Bootstrap()
 
 	migrations.Register(func(builder dbx.Builder) error {
 		db.dao = daos.New(builder)
