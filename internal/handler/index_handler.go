@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"gohtmx/internal/logging"
 	"gohtmx/util"
 	template "gohtmx/web/template/layout"
 	"net/http"
@@ -12,10 +13,14 @@ type IndexHandler interface {
 	Get(echo.Context) error
 }
 
-type indexHandler struct{}
+type indexHandler struct {
+	logger *logging.Logger
+}
 
-func NewIndexHandler() IndexHandler {
-	return &indexHandler{}
+func NewIndexHandler(logger *logging.Logger) IndexHandler {
+	return &indexHandler{
+		logger: logger,
+	}
 }
 
 func (*indexHandler) Get(c echo.Context) error {

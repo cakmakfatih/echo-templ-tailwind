@@ -9,7 +9,7 @@ func routes(s *server) {
 }
 
 func registerIndexHandlers(s *server) {
-	indexHandler := handler.NewIndexHandler()
+	indexHandler := handler.NewIndexHandler(s.logger)
 
 	s.e.GET("/", indexHandler.Get)
 }
