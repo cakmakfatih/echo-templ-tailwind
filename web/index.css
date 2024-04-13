@@ -5,14 +5,14 @@
 @font-face {
     font-family: 'Inter';
     font-weight: 400;
-    src: local('sans-serif'), url(/assets/fonts/Inter-Regular.ttf);
+    src: local('sans-serif'), url(/static/fonts/Inter-Regular.ttf);
     font-display: swap;
 }
 
 @font-face {
     font-family: 'Inter';
     font-weight: 700;
-    src: local('sans-serif'), url(/assets/fonts/Inter-Bold.ttf);
+    src: local('sans-serif'), url(/static/fonts/Inter-Bold.ttf);
     font-display: swap;
 }
 

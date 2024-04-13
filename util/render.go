@@ -2,7 +2,7 @@ package util
 
 import (
 	"github.com/a-h/templ"
-	"github.com/labstack/echo/v5"
+	"github.com/labstack/echo/v4"
 )
 
 func Render(ctx echo.Context, statusCode int, t templ.Component) error {

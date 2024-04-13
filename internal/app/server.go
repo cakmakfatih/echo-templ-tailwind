@@ -2,10 +2,11 @@ package app
 
 import (
 	"gohtmx/internal/logging"
+	"net/http"
 	"strings"
 
-	"github.com/labstack/echo/v5"
-	"github.com/labstack/echo/v5/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 type Server interface {
@@ -41,6 +42,13 @@ func NewServer(logger *logging.Logger) Server {
 
 	s.e.Use(middleware.Gzip())
 	s.e.Use(staticCacheMiddleware())
+	s.e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
+		TokenLookup:    "cookie:_csrf",
+		CookiePath:     "/",
+		CookieSecure:   true,
+		CookieHTTPOnly: true,
+		CookieSameSite: http.SameSiteLaxMode,
+	}))
 
 	s.e.Static("/static/", "./web/static/")
 
