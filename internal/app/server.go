@@ -42,10 +42,10 @@ func staticCacheMiddleware() echo.MiddlewareFunc {
 
 func NewServer(logger *logging.Logger) Server {
 	(*logger).Info("Initializing Server")
-	s := &server{}
-
-	s.logger = logger
-	s.e = echo.New()
+	s := &server{
+		logger: logger,
+		e:      echo.New(),
+	}
 
 	(*logger).Info("Assigning middlewares")
 
