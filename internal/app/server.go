@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gohtmx/config"
 	"gohtmx/internal/logging"
+	"log/slog"
 	"net/http"
 	"os"
 	"strings"
@@ -24,6 +25,7 @@ type server struct {
 }
 
 func (s *server) Run() {
+	(*s.logger).Info("Starting server on port", slog.String("port", os.Getenv("PORT")))
 	s.e.Start(fmt.Sprintf(":%v", os.Getenv("PORT")))
 }
 
@@ -40,6 +42,7 @@ func staticCacheMiddleware() echo.MiddlewareFunc {
 }
 
 func NewServer(logger *logging.Logger) Server {
+	(*logger).Info("Initializing Server")
 	config.InitConfig()
 
 	s := &server{}
@@ -47,6 +50,7 @@ func NewServer(logger *logging.Logger) Server {
 	s.logger = logger
 	s.e = echo.New()
 
+	(*logger).Info("Assigning middlewares")
 	s.e.Use(middleware.Gzip())
 	s.e.Use(staticCacheMiddleware())
 	s.e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
