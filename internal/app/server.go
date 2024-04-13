@@ -3,8 +3,11 @@ package app
 import (
 	"gohtmx/internal/logging"
 	"net/http"
+	"os"
 	"strings"
 
+	"github.com/gorilla/sessions"
+	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -49,6 +52,7 @@ func NewServer(logger *logging.Logger) Server {
 		CookieHTTPOnly: true,
 		CookieSameSite: http.SameSiteLaxMode,
 	}))
+	s.e.Use(session.Middleware(sessions.NewCookieStore([]byte(os.Getenv("SESSION_SECRET_TOKEN")))))
 
 	s.e.Static("/static/", "./web/static/")
 
