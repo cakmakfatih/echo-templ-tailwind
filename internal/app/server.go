@@ -1,6 +1,8 @@
 package app
 
 import (
+	"fmt"
+	"gohtmx/config"
 	"gohtmx/internal/logging"
 	"net/http"
 	"os"
@@ -22,7 +24,7 @@ type server struct {
 }
 
 func (s *server) Run() {
-	s.e.Start(":3000")
+	s.e.Start(fmt.Sprintf(":%v", os.Getenv("PORT")))
 }
 
 func staticCacheMiddleware() echo.MiddlewareFunc {
@@ -38,6 +40,8 @@ func staticCacheMiddleware() echo.MiddlewareFunc {
 }
 
 func NewServer(logger *logging.Logger) Server {
+	config.InitConfig()
+
 	s := &server{}
 
 	s.logger = logger
