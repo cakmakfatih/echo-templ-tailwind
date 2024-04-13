@@ -2,7 +2,6 @@ package app
 
 import (
 	"fmt"
-	"gohtmx/config"
 	"gohtmx/internal/logging"
 	"log/slog"
 	"net/http"
@@ -43,14 +42,13 @@ func staticCacheMiddleware() echo.MiddlewareFunc {
 
 func NewServer(logger *logging.Logger) Server {
 	(*logger).Info("Initializing Server")
-	config.InitConfig()
-
 	s := &server{}
 
 	s.logger = logger
 	s.e = echo.New()
 
 	(*logger).Info("Assigning middlewares")
+
 	s.e.Use(middleware.Gzip())
 	s.e.Use(staticCacheMiddleware())
 	s.e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
