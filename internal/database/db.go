@@ -37,6 +37,10 @@ func NewDB() *DB {
 		return nil
 	})
 
+	serveCommand.SetArgs([]string{
+		"--http=0.0.0.0:8090",
+	})
+
 	go serveCommand.Execute()
 
 	return db
