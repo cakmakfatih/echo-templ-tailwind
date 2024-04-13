@@ -13,25 +13,26 @@ import (
 
 type DB struct {
 	app *pocketbase.PocketBase
-	dao *daos.Dao
+	Dao *daos.Dao
 }
 
 func NewDB() *DB {
 	db := &DB{}
+
 	db.app = pocketbase.New()
 	db.app.Bootstrap()
 
 	serveCommand := cmd.NewServeCommand(db.app, false)
 
 	migrations.Register(func(builder dbx.Builder) error {
-		db.dao = daos.New(builder)
+		db.Dao = daos.New(builder)
 
 		admin := models.Admin{}
 
 		admin.Email = os.Getenv("PB_ADMIN_EMAIL")
 		admin.SetPassword(os.Getenv("PB_ADMIN_PASSWORD"))
 
-		return db.dao.Save(&admin)
+		return db.Dao.Save(&admin)
 	}, func(builder dbx.Builder) error {
 		return nil
 	})
