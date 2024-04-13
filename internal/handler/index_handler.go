@@ -3,7 +3,7 @@ package handler
 import (
 	"gohtmx/internal/logging"
 	"gohtmx/util"
-	template "gohtmx/web/template/layout"
+	page "gohtmx/web/template/page"
 	"net/http"
 
 	"github.com/labstack/echo/v5"
@@ -24,5 +24,5 @@ func NewIndexHandler(logger *logging.Logger) IndexHandler {
 }
 
 func (*indexHandler) Get(c echo.Context) error {
-	return util.Render(c, http.StatusOK, template.MainLayout("Home"))
+	return util.Render(c, http.StatusOK, page.HomePage())
 }
