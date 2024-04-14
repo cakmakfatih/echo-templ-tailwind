@@ -23,10 +23,10 @@ func NewDB() *DB {
 	db.app.Bootstrap()
 
 	serveCommand := cmd.NewServeCommand(db.app, false)
+	builder := db.app.Dao().DB()
+	db.Dao = daos.New(builder)
 
 	migrations.Register(func(builder dbx.Builder) error {
-		db.Dao = daos.New(builder)
-
 		admin := models.Admin{}
 
 		admin.Email = os.Getenv("PB_ADMIN_EMAIL")

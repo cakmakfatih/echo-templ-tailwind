@@ -2,6 +2,7 @@ package app
 
 import (
 	"fmt"
+	"gohtmx/internal/database"
 	"gohtmx/internal/logging"
 	"log/slog"
 	"net/http"
@@ -21,6 +22,7 @@ type Server interface {
 type server struct {
 	logger *logging.Logger
 	e      *echo.Echo
+	db     *database.DB
 }
 
 func (s *server) Run() {
@@ -40,11 +42,12 @@ func staticCacheMiddleware() echo.MiddlewareFunc {
 	}
 }
 
-func NewServer(logger *logging.Logger) Server {
+func NewServer(logger *logging.Logger, db *database.DB) Server {
 	(*logger).Info("Initializing Server")
 	s := &server{
 		logger: logger,
 		e:      echo.New(),
+		db:     db,
 	}
 
 	(*logger).Info("Assigning middlewares")

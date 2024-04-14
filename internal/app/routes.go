@@ -2,14 +2,17 @@ package app
 
 import (
 	"gohtmx/internal/handler"
+	"gohtmx/internal/repository"
 	"net/http"
 )
 
 func routes(s *server) {
 	(*s.logger).Info("Initializing routes")
 
+	userRepository := repository.NewUserRepository(s.logger, s.db)
+
 	registerIndexHandler(s)
-	registerAuthHandler(s)
+	registerAuthHandler(s, &userRepository)
 }
 
 func registerIndexHandler(s *server) {
@@ -19,9 +22,10 @@ func registerIndexHandler(s *server) {
 	s.e.Add(http.MethodGet, "/", indexHandler.Get)
 }
 
-func registerAuthHandler(s *server) {
+func registerAuthHandler(s *server, userRepository *repository.UserRepository) {
 	(*s.logger).Info("Registering authHandler to the route")
-	authHandler := handler.NewAuthHandler(s.logger)
+	authHandler := handler.NewAuthHandler(s.logger, userRepository)
 
 	s.e.Add(http.MethodGet, "/login", authHandler.GetLogin)
+	s.e.Add(http.MethodPost, "/auth/sign-in", authHandler.AuthenticateWithEmailAndPassword)
 }

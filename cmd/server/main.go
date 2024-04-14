@@ -8,10 +8,10 @@ import (
 )
 
 func main() {
-	database.NewDB()
 	config.InitConfig()
+	db := database.NewDB()
 	logger := logging.NewLogger()
-	server := app.NewServer(&logger)
+	server := app.NewServer(&logger, db)
 
 	server.Run()
 }
