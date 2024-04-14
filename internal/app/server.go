@@ -1,8 +1,10 @@
 package app
 
 import (
+	"encoding/gob"
 	"fmt"
 	"gohtmx/internal/database"
+	"gohtmx/internal/entity"
 	"gohtmx/internal/logging"
 	"log/slog"
 	"net/http"
@@ -44,6 +46,9 @@ func staticCacheMiddleware() echo.MiddlewareFunc {
 
 func NewServer(logger *logging.Logger, db *database.DB) Server {
 	(*logger).Info("Initializing Server")
+
+	gob.Register(&entity.UserSession{})
+
 	s := &server{
 		logger: logger,
 		e:      echo.New(),

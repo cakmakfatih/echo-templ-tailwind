@@ -5,10 +5,11 @@ import (
 	"errors"
 	"gohtmx/internal/database"
 	"gohtmx/internal/logging"
+	"gohtmx/internal/model"
 )
 
 type UserRepository interface {
-	AuthenticateWithEmailAndPassword(creds *LoginForm) error
+	AuthenticateWithEmailAndPassword(creds *LoginForm) (*model.UserModel, error)
 }
 
 type userRepository struct {
@@ -28,20 +29,28 @@ func NewUserRepository(logger *logging.Logger, db *database.DB) UserRepository {
 	}
 }
 
-func (r *userRepository) AuthenticateWithEmailAndPassword(creds *LoginForm) error {
+func (r *userRepository) AuthenticateWithEmailAndPassword(creds *LoginForm) (*model.UserModel, error) {
 	authRecord, err := r.db.Dao.FindAuthRecordByEmail("users", creds.Email)
 
 	if err == sql.ErrNoRows {
-		return errors.New("incorrect username or password")
+		return nil, errors.New("incorrect username or password")
 	} else if err != nil {
-		return err
+		return nil, err
 	}
 
 	isPasswordCorrect := authRecord.ValidatePassword(creds.Password)
 
 	if !isPasswordCorrect {
-		return errors.New("incorrect username or password")
+		return nil, errors.New("incorrect username or password")
 	}
 
-	return nil
+	userModel := &model.UserModel{
+		Email:    authRecord.Email(),
+		Username: authRecord.GetString("username"),
+		Roles:    authRecord.GetStringSlice("roles"),
+	}
+
+	userModel.SetId(authRecord.Id)
+
+	return userModel, nil
 }
