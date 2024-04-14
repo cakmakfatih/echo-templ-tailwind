@@ -12,18 +12,18 @@ import (
 )
 
 type DB struct {
-	app *pocketbase.PocketBase
+	App *pocketbase.PocketBase
 	Dao *daos.Dao
 }
 
 func NewDB() *DB {
 	db := &DB{}
 
-	db.app = pocketbase.New()
-	db.app.Bootstrap()
+	db.App = pocketbase.New()
+	db.App.Bootstrap()
 
-	serveCommand := cmd.NewServeCommand(db.app, false)
-	builder := db.app.Dao().DB()
+	serveCommand := cmd.NewServeCommand(db.App, false)
+	builder := db.App.Dao().DB()
 	db.Dao = daos.New(builder)
 
 	migrations.Register(func(builder dbx.Builder) error {
