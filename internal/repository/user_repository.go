@@ -29,8 +29,12 @@ func NewUserRepository(logger *logging.Logger, db *database.DB) UserRepository {
 	}
 }
 
+func (r *userRepository) tableName() string {
+	return "users"
+}
+
 func (r *userRepository) AuthenticateWithEmailAndPassword(creds *LoginForm) (*model.UserModel, error) {
-	authRecord, err := r.db.Dao.FindAuthRecordByEmail("users", creds.Email)
+	authRecord, err := r.db.Dao.FindAuthRecordByEmail(r.tableName(), creds.Email)
 
 	if err == sql.ErrNoRows {
 		return nil, errors.New("incorrect username or password")

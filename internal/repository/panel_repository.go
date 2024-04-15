@@ -24,12 +24,15 @@ func NewPanelRepository(logger *logging.Logger, db *database.DB) PanelRepository
 	}
 }
 
+func (r *panelRepository) tableName() string {
+	return "panels"
+}
+
 func (r *panelRepository) GetPanelsOfUser(user *model.UserModel) ([]*model.PanelModel, error) {
 	var panels []*model.PanelModel
-	var panelModel *model.PanelModel
 
 	err := r.db.App.DB().Select("*").
-		From(panelModel.TableName()).
+		From(r.tableName()).
 		Where(dbx.NewExp("user = {:user_id}", dbx.Params{
 			"user_id": user.Id,
 		})).All(&panels)
