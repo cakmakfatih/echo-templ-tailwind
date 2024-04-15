@@ -1,9 +1,12 @@
 package template
 
-import layout "gohtmx/web/template/layout"
+import (
+    layout "gohtmx/web/template/layout"
+    component "gohtmx/web/template/component"
+)
 
 templ HomePage(){
     @layout.MainLayout("Home") {
-        <h1 class="text-xl">home</h1>
+        @component.LoginComponent()
     }
 }

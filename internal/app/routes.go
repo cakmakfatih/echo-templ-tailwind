@@ -26,6 +26,5 @@ func registerAuthHandler(s *server, userRepository *repository.UserRepository) {
 	(*s.logger).Info("Registering authHandler to the route")
 	authHandler := handler.NewAuthHandler(s.logger, userRepository)
 
-	s.e.Add(http.MethodGet, "/login", authHandler.GetLogin)
 	s.e.Add(http.MethodPost, "/auth/sign-in", authHandler.AuthenticateWithEmailAndPassword)
 }

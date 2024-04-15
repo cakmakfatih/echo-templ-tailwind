@@ -4,8 +4,6 @@ import (
 	"gohtmx/internal/entity"
 	"gohtmx/internal/logging"
 	"gohtmx/internal/repository"
-	"gohtmx/util"
-	page "gohtmx/web/template/page"
 	"net/http"
 
 	"github.com/gorilla/sessions"
@@ -15,7 +13,6 @@ import (
 )
 
 type AuthHandler interface {
-	GetLogin(c echo.Context) error
 	AuthenticateWithEmailAndPassword(c echo.Context) error
 }
 
@@ -29,10 +26,6 @@ func NewAuthHandler(logger *logging.Logger, userRepository *repository.UserRepos
 		logger:         logger,
 		userRepository: userRepository,
 	}
-}
-
-func (*authHandler) GetLogin(c echo.Context) error {
-	return util.Render(c, http.StatusOK, page.LoginPage())
 }
 
 func (h *authHandler) AuthenticateWithEmailAndPassword(c echo.Context) error {
