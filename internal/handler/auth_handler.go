@@ -20,14 +20,16 @@ type AuthHandler interface {
 }
 
 type authHandler struct {
-	logger         *logging.Logger
-	userRepository *repository.UserRepository
+	logger          *logging.Logger
+	userRepository  *repository.UserRepository
+	panelRepository *repository.PanelRepository
 }
 
-func NewAuthHandler(logger *logging.Logger, userRepository *repository.UserRepository) AuthHandler {
+func NewAuthHandler(logger *logging.Logger, userRepository *repository.UserRepository, panelRepository *repository.PanelRepository) AuthHandler {
 	return &authHandler{
-		logger:         logger,
-		userRepository: userRepository,
+		logger:          logger,
+		userRepository:  userRepository,
+		panelRepository: panelRepository,
 	}
 }
 

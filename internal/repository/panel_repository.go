@@ -32,7 +32,7 @@ func (r *panelRepository) GetPanelsOfUser(user *model.UserModel) ([]*model.Panel
 		From(panelModel.TableName()).
 		Where(dbx.NewExp("user = {:user_id}", dbx.Params{
 			"user_id": user.Id,
-		})).All(panels)
+		})).All(&panels)
 
 	if err != nil {
 		return panels, err
