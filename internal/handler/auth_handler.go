@@ -4,6 +4,8 @@ import (
 	"gohtmx/internal/entity"
 	"gohtmx/internal/logging"
 	"gohtmx/internal/repository"
+	"gohtmx/util"
+	page "gohtmx/web/template/page"
 	"net/http"
 
 	"github.com/gorilla/sessions"
@@ -14,6 +16,7 @@ import (
 
 type AuthHandler interface {
 	AuthenticateWithEmailAndPassword(c echo.Context) error
+	LoginPage(c echo.Context) error
 }
 
 type authHandler struct {
@@ -71,5 +74,15 @@ func (h *authHandler) AuthenticateWithEmailAndPassword(c echo.Context) error {
 		return c.NoContent(http.StatusInternalServerError)
 	}
 
-	return c.String(http.StatusOK, user.Id)
+	c.Response().Header().Set("HX-Redirect", "/")
+
+	return c.NoContent(http.StatusOK)
+}
+
+func (h *authHandler) LoginPage(c echo.Context) error {
+	if c.Get("is_authenticated") == true {
+		return c.Redirect(http.StatusPermanentRedirect, "/")
+	}
+
+	return util.Render(c, http.StatusOK, page.LoginPage())
 }

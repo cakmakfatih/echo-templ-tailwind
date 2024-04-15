@@ -1,0 +1,12 @@
+package template
+
+import (
+    layout "gohtmx/web/template/layout"
+    component "gohtmx/web/template/component"
+)
+
+templ LoginPage() {
+    @layout.MainLayout("GSA - Login") {
+        @component.LoginForm()
+    }
+}

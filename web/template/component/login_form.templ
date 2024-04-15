@@ -1,6 +1,6 @@
 package template
 
-templ LoginComponent() {
+templ LoginForm() {
     <div class="flex flex-1 items-center justify-center bg-slate-100">
         <form hx-post="/auth/sign-in" hx-indicator="#btnSpinner" hx-swap="none" x-data="{ email: '', password: '', form: $el }" class="flex flex-col m-3 p-4 bg-white rounded-md border border-black/[0.12] w-[380px] max-w-[95vw]">
             <h1 class="pt-2 px-1 text-2xl font-bold">GSA Login</h1>
