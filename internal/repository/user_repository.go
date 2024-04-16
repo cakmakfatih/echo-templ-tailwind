@@ -34,6 +34,7 @@ func (r *userRepository) tableName() string {
 }
 
 func (r *userRepository) AuthenticateWithEmailAndPassword(creds *LoginForm) (*model.UserModel, error) {
+	(*r.logger).Info("User is authenticating with email and password")
 	authRecord, err := r.db.Dao.FindAuthRecordByEmail(r.tableName(), creds.Email)
 
 	if err == sql.ErrNoRows {

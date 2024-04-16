@@ -4,6 +4,7 @@ import (
 	"gohtmx/internal/database"
 	"gohtmx/internal/logging"
 	"gohtmx/internal/model"
+	"log/slog"
 
 	"github.com/pocketbase/dbx"
 )
@@ -29,6 +30,7 @@ func (r *panelRepository) tableName() string {
 }
 
 func (r *panelRepository) GetPanelsOfUser(user *model.UserModel) ([]*model.PanelModel, error) {
+	(*r.logger).Info("Getting panels of the user", slog.String("id", user.Id))
 	var panels []*model.PanelModel
 
 	err := r.db.App.DB().Select("*").
