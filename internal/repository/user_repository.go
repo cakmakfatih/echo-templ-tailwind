@@ -17,11 +17,6 @@ type userRepository struct {
 	db     *database.DB
 }
 
-type LoginForm struct {
-	Email    string `form:"email"`
-	Password string `form:"password"`
-}
-
 func NewUserRepository(logger *logging.Logger, db *database.DB) UserRepository {
 	return &userRepository{
 		logger: logger,
@@ -31,6 +26,11 @@ func NewUserRepository(logger *logging.Logger, db *database.DB) UserRepository {
 
 func (r *userRepository) tableName() string {
 	return "users"
+}
+
+type LoginForm struct {
+	Email    string `form:"email"`
+	Password string `form:"password"`
 }
 
 func (r *userRepository) AuthenticateWithEmailAndPassword(creds *LoginForm) (*model.UserModel, error) {

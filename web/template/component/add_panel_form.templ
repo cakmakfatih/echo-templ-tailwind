@@ -2,15 +2,15 @@ package template
 
 templ AddPanelForm() {
     <div class="flex flex-1 items-center justify-center bg-slate-100">
-        <form class="flex flex-col m-3 p-4 bg-white rounded-md border border-black/[0.12] w-[450px] max-w-[95vw]">
+        <form hx-post="/panel" hx-indicator="#btnSpinner" hx-swap="none" class="flex flex-col m-3 p-4 bg-white rounded-md border border-black/[0.12] w-[450px] max-w-[95vw]">
             <h1 class="pt-2 px-1 text-2xl font-bold">GSA - Add Panel</h1>
             <hr class="my-2" />
             <span class="text-gray-500 px-1 pb-4 text-sm">Before moving on, you need to have at least 1 panel saved</span>
-            <input name="email" class="py-2 px-3 bg-slate-100 border border-black/[0.12] rounded-md focus:outline-none focus:ring focus:border-blue-500" type="url" placeholder="Login URL (*)" required/>
+            <input name="loginUrl" class="py-2 px-3 bg-slate-100 border border-black/[0.12] rounded-md focus:outline-none focus:ring focus:border-blue-500" type="url" placeholder="Login URL (*)" required/>
             <input name="supportUsername" class="py-2 px-3 mt-2 bg-slate-100 border border-black/[0.12] rounded-md focus:outline-none focus:ring focus:border-blue-500" type="text" placeholder="Support Username (*)" required/>
             <input name="supportPassword" class="py-2 px-3 mt-2 bg-slate-100 border border-black/[0.12] rounded-md focus:outline-none focus:ring focus:border-blue-500" type="password" placeholder="Support Password (*)" required/>
-            <input name="telegramToken" class="py-2 px-3 mt-2 bg-slate-100 border border-black/[0.12] rounded-md focus:outline-none focus:ring focus:border-blue-500" type="text" placeholder="Telegram Token" required/>
-            <input name="password" class="py-2 px-3 mt-2 bg-slate-100 border border-black/[0.12] rounded-md focus:outline-none focus:ring focus:border-blue-500" type="text" placeholder="WhatsApp Token" required/>
+            <input name="telegramToken" class="py-2 px-3 mt-2 bg-slate-100 border border-black/[0.12] rounded-md focus:outline-none focus:ring focus:border-blue-500" type="text" placeholder="Telegram Token"/>
+            <input name="whatsappToken" class="py-2 px-3 mt-2 bg-slate-100 border border-black/[0.12] rounded-md focus:outline-none focus:ring focus:border-blue-500" type="text" placeholder="WhatsApp Token"/>
             <button
                 class="btn"
                 type="submit"

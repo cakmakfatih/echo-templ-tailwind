@@ -1,7 +1,10 @@
 package repository
 
 import (
+	"database/sql"
+	"errors"
 	"gohtmx/internal/database"
+	"gohtmx/internal/entity"
 	"gohtmx/internal/logging"
 	"gohtmx/internal/model"
 	"log/slog"
@@ -11,7 +14,7 @@ import (
 
 type PanelRepository interface {
 	GetPanelsOfUser(user *model.UserModel) ([]*model.PanelModel, error)
-	Create(panel *model.PanelModel) error
+	Create(user *entity.UserSession, panelForm *PanelForm) (*model.PanelModel, error)
 }
 
 type panelRepository struct {
@@ -47,6 +50,41 @@ func (r *panelRepository) GetPanelsOfUser(user *model.UserModel) ([]*model.Panel
 	return panels, nil
 }
 
-func (r *panelRepository) Create(panel *model.PanelModel) error {
-	return nil
+type PanelForm struct {
+	LoginURL        string `form:"loginUrl"`
+	SupportUsername string `form:"supportUsername"`
+	SupportPassword string `form:"supportPassword"`
+	TelegramToken   string `form:"telegramToken"`
+	WhatsappToken   string `form:"whatsappToken"`
+}
+
+func (r *panelRepository) Create(user *entity.UserSession, panelForm *PanelForm) (*model.PanelModel, error) {
+	panelModel := &model.PanelModel{
+		User:            user.Id,
+		LoginURL:        panelForm.LoginURL,
+		SupportUsername: panelForm.SupportUsername,
+		SupportPassword: panelForm.SupportPassword,
+		WhatsappToken:   panelForm.WhatsappToken,
+		TelegramToken:   panelForm.TelegramToken,
+	}
+
+	err := r.db.Dao.DB().
+		Select("*").
+		From(r.tableName()).
+		Where(dbx.NewExp("user = {:user_id}", dbx.Params{"user_id": user.Id})).
+		One(&panelModel)
+
+	if err != sql.ErrNoRows {
+		return panelModel, errors.New("user already has a panel")
+	}
+
+	err = r.db.Dao.Save(panelModel)
+
+	if err != nil {
+		(*r.logger).Warn("Could not create a panel")
+
+		return panelModel, err
+	}
+
+	return panelModel, nil
 }
