@@ -66,7 +66,7 @@ func (r *serviceRepository) GetServices(panels []*entity.PanelSession) ([]*model
 
 	err := r.db.Dao.DB().Select("`services`.*").
 		From(r.tableName()).
-		Join("RIGHT JOIN", "providers", dbx.In("providers.panel", panelIds...)).
+		Join("INNER JOIN", "providers", dbx.In("providers.panel", panelIds...)).
 		All(&services)
 
 	if err != nil {

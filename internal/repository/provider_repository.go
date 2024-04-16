@@ -2,6 +2,7 @@ package repository
 
 import (
 	"gohtmx/internal/database"
+	"gohtmx/internal/entity"
 	"gohtmx/internal/logging"
 	"gohtmx/internal/model"
 
@@ -9,7 +10,7 @@ import (
 )
 
 type ProviderRepository interface {
-	GetProviders(panels []*model.PanelModel) ([]*model.ProviderModel, error)
+	GetProviders(panels []*entity.PanelSession) ([]*model.ProviderModel, error)
 }
 
 type providerRepository struct {
@@ -28,7 +29,7 @@ func (*providerRepository) tableName() string {
 	return "providers"
 }
 
-func (r *providerRepository) GetProviders(panels []*model.PanelModel) ([]*model.ProviderModel, error) {
+func (r *providerRepository) GetProviders(panels []*entity.PanelSession) ([]*model.ProviderModel, error) {
 	var panelIds []string
 	var providers []*model.ProviderModel
 

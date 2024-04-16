@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"gohtmx/internal/entity"
 	"gohtmx/internal/logging"
 	"gohtmx/internal/repository"
@@ -31,7 +30,6 @@ func (h *serviceHandler) Get(c echo.Context) error {
 	_, err := (*h.serviceRepository).GetServices(panels)
 
 	if err != nil {
-		fmt.Println(err)
 		return c.NoContent(http.StatusInternalServerError)
 	}
 
