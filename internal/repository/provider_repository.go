@@ -39,7 +39,7 @@ func (r *providerRepository) GetProviders(panels []*model.PanelModel) ([]*model.
 	err := r.db.Dao.DB().Select("*").
 		From(r.tableName()).
 		Where(dbx.In("panel", panelIds)).
-		All(providers)
+		All(&providers)
 
 	if err != nil {
 		return providers, err

@@ -59,6 +59,7 @@ type PanelForm struct {
 }
 
 func (r *panelRepository) Create(user *entity.UserSession, panelForm *PanelForm) (*model.PanelModel, error) {
+	(*r.logger).Info("Creating a panel")
 	panelModel := &model.PanelModel{
 		User:            user.Id,
 		LoginURL:        panelForm.LoginURL,

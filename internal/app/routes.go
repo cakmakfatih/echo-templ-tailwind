@@ -11,10 +11,12 @@ func routes(s *server) {
 
 	userRepository := repository.NewUserRepository(s.logger, s.db)
 	panelRepository := repository.NewPanelRepository(s.logger, s.db)
+	serviceRepository := repository.NewServiceRepository(s.logger, s.db)
 
 	registerIndexHandler(s)
 	registerAuthHandler(s, &userRepository, &panelRepository)
 	registerPanelHandler(s, &panelRepository)
+	registerServiceHandler(s, &serviceRepository)
 }
 
 func registerIndexHandler(s *server) {
@@ -37,4 +39,11 @@ func registerPanelHandler(s *server, panelRepository *repository.PanelRepository
 	panelHandler := handler.NewPanelHandler(s.logger, panelRepository)
 
 	s.e.POST("/panel", panelHandler.Create, middleware.AuthGuard())
+}
+
+func registerServiceHandler(s *server, serviceRepository *repository.ServiceRepository) {
+	(*s.logger).Info("Registering serviceHandler to the route")
+	serviceHandler := handler.NewServiceHandler(s.logger, serviceRepository)
+
+	s.e.GET("/service", serviceHandler.Get, middleware.AuthGuard())
 }
