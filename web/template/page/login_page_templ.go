@@ -11,7 +11,7 @@ import "io"
 import "bytes"
 
 import (
-	component "gohtmx/web/template/component"
+	component "gohtmx/web/template/component/form"
 	layout "gohtmx/web/template/layout"
 )
 

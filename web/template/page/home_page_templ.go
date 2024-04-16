@@ -12,7 +12,7 @@ import "bytes"
 
 import (
 	"gohtmx/internal/entity"
-	component "gohtmx/web/template/component"
+	component "gohtmx/web/template/component/form"
 	layout "gohtmx/web/template/layout"
 )
 
