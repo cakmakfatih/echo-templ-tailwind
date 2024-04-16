@@ -17,6 +17,7 @@ import (
 type AuthHandler interface {
 	AuthenticateWithEmailAndPassword(c echo.Context) error
 	LoginPage(c echo.Context) error
+	Logout(c echo.Context) error
 }
 
 type authHandler struct {
@@ -103,6 +104,24 @@ func (h *authHandler) AuthenticateWithEmailAndPassword(c echo.Context) error {
 	c.Response().Header().Set("HX-Redirect", "/")
 
 	return c.NoContent(http.StatusOK)
+}
+
+func (h *authHandler) Logout(c echo.Context) error {
+	sess, err := session.Get("session", c)
+
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+
+	sess.Options.MaxAge = -1
+
+	if err := sess.Save(c.Request(), c.Response().Writer); err != nil {
+		return c.NoContent(http.StatusInternalServerError)
+	}
+
+	c.Response().Header().Set("HX-Refresh", "true")
+
+	return nil
 }
 
 func (h *authHandler) LoginPage(c echo.Context) error {

@@ -32,6 +32,7 @@ func registerAuthHandler(s *server, userRepository *repository.UserRepository, p
 
 	s.e.GET("/login", authHandler.LoginPage, middleware.AuthGuard())
 	s.e.POST("/auth/sign-in", authHandler.AuthenticateWithEmailAndPassword)
+	s.e.GET("/auth/sign-out", authHandler.Logout)
 }
 
 func registerPanelHandler(s *server, panelRepository *repository.PanelRepository) {
