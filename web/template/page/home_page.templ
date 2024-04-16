@@ -2,10 +2,14 @@ package template
 
 import (
     layout "gohtmx/web/template/layout"
+    component "gohtmx/web/template/component"
+	"gohtmx/internal/entity"
 )
 
-templ HomePage(){
+templ HomePage(panels []*entity.PanelSession){
     @layout.MainLayout("Panel") {
-        
+        if len(panels) == 0 {
+            @component.AddPanelForm()
+        }
     }
 }

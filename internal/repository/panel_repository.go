@@ -11,6 +11,7 @@ import (
 
 type PanelRepository interface {
 	GetPanelsOfUser(user *model.UserModel) ([]*model.PanelModel, error)
+	Create(panel *model.PanelModel) error
 }
 
 type panelRepository struct {
@@ -44,4 +45,8 @@ func (r *panelRepository) GetPanelsOfUser(user *model.UserModel) ([]*model.Panel
 	}
 
 	return panels, nil
+}
+
+func (r *panelRepository) Create(panel *model.PanelModel) error {
+	return nil
 }

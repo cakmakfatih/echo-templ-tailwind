@@ -70,6 +70,30 @@ func (h *authHandler) AuthenticateWithEmailAndPassword(c echo.Context) error {
 	}
 	sess.Values["csrf"] = c.Get(middleware.DefaultCSRFConfig.ContextKey).(string)
 
+	panels, err := (*h.panelRepository).GetPanelsOfUser(user)
+
+	if err != nil {
+		(*h.logger).Warn("Error getting panels on [AuthenticateWithEmailAndPassword]")
+	}
+
+	var panelEntities []*entity.PanelSession
+
+	for _, p := range panels {
+		panelEntities = append(panelEntities, &entity.PanelSession{
+			Id:              p.Id,
+			User:            p.User,
+			LoginURL:        p.LoginURL,
+			SupportUsername: p.SupportUsername,
+			SupportPassword: p.SupportPassword,
+			TelegramToken:   p.TelegramToken,
+			WhatsappToken:   p.WhatsappToken,
+			Created:         p.Created.Time(),
+			Updated:         p.Updated.Time(),
+		})
+	}
+
+	sess.Values["panels"] = panelEntities
+
 	err = sess.Save(c.Request(), c.Response())
 
 	if err != nil {

@@ -48,6 +48,7 @@ func NewServer(logger *logging.Logger, db *database.DB) Server {
 	(*logger).Info("Initializing Server")
 
 	gob.Register(&entity.UserSession{})
+	gob.Register([]*entity.PanelSession{})
 
 	s := &server{
 		logger: logger,

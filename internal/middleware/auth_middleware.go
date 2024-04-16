@@ -34,6 +34,12 @@ func AuthGuard() echo.MiddlewareFunc {
 				return redirectOrNextBasedOnPath(c, reqPath, next)
 			}
 
+			panels, exists := sess.Values["panels"].([]*entity.PanelSession)
+
+			if !exists {
+				return redirectOrNextBasedOnPath(c, reqPath, next)
+			}
+
 			savedCsrf, exists := sess.Values["csrf"].(string)
 
 			if !exists {
@@ -52,6 +58,7 @@ func AuthGuard() echo.MiddlewareFunc {
 
 			c.Set("is_authenticated", true)
 			c.Set("user", &user)
+			c.Set("panels", panels)
 
 			return next(c)
 		}

@@ -11,10 +11,12 @@ import "io"
 import "bytes"
 
 import (
+	"gohtmx/internal/entity"
+	component "gohtmx/web/template/component"
 	layout "gohtmx/web/template/layout"
 )
 
-func HomePage() templ.Component {
+func HomePage(panels []*entity.PanelSession) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -32,6 +34,12 @@ func HomePage() templ.Component {
 			if !templ_7745c5c3_IsBuffer {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+			}
+			if len(panels) == 0 {
+				templ_7745c5c3_Err = component.AddPanelForm().Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
 			}
 			if !templ_7745c5c3_IsBuffer {
 				_, templ_7745c5c3_Err = io.Copy(templ_7745c5c3_W, templ_7745c5c3_Buffer)

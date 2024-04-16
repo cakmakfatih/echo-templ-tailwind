@@ -14,6 +14,7 @@ func routes(s *server) {
 
 	registerIndexHandler(s)
 	registerAuthHandler(s, &userRepository, &panelRepository)
+	registerPanelHandler(s, &panelRepository)
 }
 
 func registerIndexHandler(s *server) {
@@ -29,4 +30,11 @@ func registerAuthHandler(s *server, userRepository *repository.UserRepository, p
 
 	s.e.GET("/login", authHandler.LoginPage, middleware.AuthGuard())
 	s.e.POST("/auth/sign-in", authHandler.AuthenticateWithEmailAndPassword)
+}
+
+func registerPanelHandler(s *server, panelRepository *repository.PanelRepository) {
+	(*s.logger).Info("Registering panelHandler to the route")
+	panelHandler := handler.NewPanelHandler(s.logger, panelRepository)
+
+	s.e.POST("/panel", panelHandler.Create, middleware.AuthGuard())
 }

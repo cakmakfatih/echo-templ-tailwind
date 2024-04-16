@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"gohtmx/internal/entity"
 	"gohtmx/internal/logging"
 	"gohtmx/util"
 	page "gohtmx/web/template/page"
@@ -24,5 +25,7 @@ func NewIndexHandler(logger *logging.Logger) IndexHandler {
 }
 
 func (*indexHandler) Get(c echo.Context) error {
-	return util.Render(c, http.StatusOK, page.HomePage())
+	panels := c.Get("panels").([]*entity.PanelSession)
+
+	return util.Render(c, http.StatusOK, page.HomePage(panels))
 }

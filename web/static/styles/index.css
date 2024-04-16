@@ -632,6 +632,10 @@ html {
   width: 380px;
 }
 
+.w-\[450px\] {
+  width: 450px;
+}
+
 .max-w-\[95vw\] {
   max-width: 95vw;
 }
