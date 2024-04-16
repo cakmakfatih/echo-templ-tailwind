@@ -30,7 +30,7 @@ func (*providerRepository) tableName() string {
 }
 
 func (r *providerRepository) GetProviders(panels []*entity.PanelSession) ([]*model.ProviderModel, error) {
-	var panelIds []string
+	var panelIds []interface{}
 	var providers []*model.ProviderModel
 
 	for _, panel := range panels {
@@ -39,7 +39,7 @@ func (r *providerRepository) GetProviders(panels []*entity.PanelSession) ([]*mod
 
 	err := r.db.Dao.DB().Select("*").
 		From(r.tableName()).
-		Where(dbx.In("panel", panelIds)).
+		Where(dbx.In("panel", panelIds...)).
 		All(&providers)
 
 	if err != nil {

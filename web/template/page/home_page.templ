@@ -15,9 +15,7 @@ templ HomePage(panels []*entity.PanelSession){
             @static.AppHeader()
             <main class="flex flex-1 min-h-0">
                 @static.Sidebar()
-                @layout.MainContent() {
-
-                }
+                <content id="pageView" hx-swap="outerHTML" hx-trigger="load" hx-get="/partial/fragment/providers" class="flex flex-col flex-1 min-h-0"></content>
             </main>
         }
     }

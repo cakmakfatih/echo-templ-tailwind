@@ -1,0 +1,26 @@
+package template
+
+import "gohtmx/util"
+
+templ TableRow(rowData *util.TableRowData) {
+    <div class="tr" hx-target="#editProviderForm" hx-swap="outerHTML" hx-get={`/partials/providers/` + rowData.Values[0]} @click="$dispatch('toggle-modal', 'toggle-edit-record'); $dispatch('toggle-edit-record')">
+        <label class="td" for={`checkbox-` + rowData.Values[0]}>
+            <input @change={`$dispatch('toggle-mark-for-delete', { id: ` + `'` + rowData.Values[0] + `'` + `, isChecked: $event.target.checked })`} id={`checkbox-` + rowData.Values[0]} name={`checkbox-` + rowData.Values[0]} type="checkbox" />
+        </label>
+        for idx, v := range rowData.Values {
+            <div class={`td ` + rowData.SizeClasses[idx]}>
+                if v == "" {
+                    <span>-</span>
+                } else {
+                    <span>{ v }</span>
+                }
+            </div>
+        }
+        <div class="flex-1 filler"></div>
+            <div class="td">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+            </svg>
+        </div>
+    </div>
+}

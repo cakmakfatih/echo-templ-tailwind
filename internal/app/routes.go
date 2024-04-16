@@ -12,11 +12,13 @@ func routes(s *server) {
 	userRepository := repository.NewUserRepository(s.logger, s.db)
 	panelRepository := repository.NewPanelRepository(s.logger, s.db)
 	serviceRepository := repository.NewServiceRepository(s.logger, s.db)
+	providerRepository := repository.NewProviderRepository(s.logger, s.db)
 
 	registerIndexHandler(s)
 	registerAuthHandler(s, &userRepository, &panelRepository)
 	registerPanelHandler(s, &panelRepository)
 	registerServiceHandler(s, &serviceRepository)
+	registerPartialHandler(s, &providerRepository)
 }
 
 func registerIndexHandler(s *server) {
@@ -47,4 +49,11 @@ func registerServiceHandler(s *server, serviceRepository *repository.ServiceRepo
 	serviceHandler := handler.NewServiceHandler(s.logger, serviceRepository)
 
 	s.e.GET("/service", serviceHandler.Get, middleware.AuthGuard())
+}
+
+func registerPartialHandler(s *server, providerRepository *repository.ProviderRepository) {
+	(*s.logger).Info("Registering partialHandler to the route")
+	partialHandler := handler.NewPartialHandler(s.logger, providerRepository)
+
+	s.e.GET("/partial/fragment/providers", partialHandler.GetProvidersFragment, middleware.AuthGuard())
 }
