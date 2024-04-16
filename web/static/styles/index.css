@@ -450,6 +450,10 @@ html {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.w-35p {
+  width: 35% !important;
+}
+
 nav li:first-child {
   margin-top: 0.5rem;
 }
@@ -585,6 +589,24 @@ div.tbody > .tr > .td:last-child {
 
 div.tbody > .tr > .filler {
   border-style: none;
+}
+
+.add-record {
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  z-index: 10;
+  display: flex;
+  height: 100dvh;
+  width: 0px;
+  flex-direction: column;
+  overflow: hidden;
+  border-right-width: 1px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 .btn {
@@ -781,6 +803,14 @@ div.tbody > .tr > .filler {
   inset-inline-start: 0px;
 }
 
+.left-0 {
+  left: 0px;
+}
+
+.top-0 {
+  top: 0px;
+}
+
 .z-20 {
   z-index: 20;
 }
@@ -831,6 +861,10 @@ div.tbody > .tr > .filler {
   margin-right: 0.25rem;
 }
 
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
 .block {
   display: block;
 }
@@ -865,6 +899,10 @@ div.tbody > .tr > .filler {
 
 .h-5 {
   height: 1.25rem;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .max-h-dvh {
@@ -925,6 +963,10 @@ div.tbody > .tr > .filler {
 
 .w-5 {
   width: 1.25rem;
+}
+
+.w-0 {
+  width: 0px;
 }
 
 .min-w-\[240px\] {
@@ -1044,6 +1086,11 @@ div.tbody > .tr > .filler {
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
+.border-gray-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
+}
+
 .bg-blue-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(96 165 250 / var(--tw-bg-opacity));
@@ -1072,6 +1119,10 @@ div.tbody > .tr > .filler {
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.bg-black\/\[0\.34\] {
+  background-color: rgb(0 0 0 / 0.34);
 }
 
 .p-4 {
@@ -1105,6 +1156,21 @@ div.tbody > .tr > .filler {
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .pb-2 {
@@ -1264,6 +1330,11 @@ div.tbody > .tr > .filler {
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-gray-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
 .focus\:border-blue-500:focus {
   --tw-border-opacity: 1;
   border-color: rgb(59 130 246 / var(--tw-border-opacity));
@@ -1298,6 +1369,11 @@ div.tbody > .tr > .filler {
 .active\:bg-gray-200:active {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.active\:bg-gray-300:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 
 @media (prefers-color-scheme: dark) {

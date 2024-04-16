@@ -35,7 +35,7 @@ func (s *server) Run() {
 func staticCacheMiddleware() echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-			if strings.HasPrefix(c.Request().URL.Path, "/assets") {
+			if strings.HasPrefix(c.Request().URL.Path, "/static") {
 				c.Response().Header().Set("Cache-Control", "public, max-age=86399")
 			}
 

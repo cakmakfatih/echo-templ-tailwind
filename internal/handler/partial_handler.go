@@ -36,7 +36,5 @@ func (h *partialHandler) GetProvidersFragment(c echo.Context) error {
 		return nil
 	}
 
-	tableData := util.ProvidersToTableData(providers)
-
-	return util.Render(c, http.StatusOK, fragment.Providers(&tableData))
+	return util.Render(c, http.StatusOK, fragment.Providers(panels, providers))
 }

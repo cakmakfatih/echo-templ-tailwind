@@ -13,7 +13,7 @@ type TableRowData struct {
 	Values      []string
 }
 
-func ProvidersToTableData(providers []*model.ProviderModel) TableData {
+func ProvidersToTableData(providers []*model.ProviderModel) *TableData {
 	var result TableData
 
 	result.SizeClasses = []string{"w-56", "w-52", "w-36", "w-56", "w-56"}
@@ -31,5 +31,5 @@ func ProvidersToTableData(providers []*model.ProviderModel) TableData {
 		})
 	}
 
-	return result
+	return &result
 }
