@@ -2,7 +2,6 @@ package model
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/pocketbase/pocketbase/models"
 )
@@ -30,15 +29,15 @@ func (*ProviderModel) TableName() string {
 	return "providers"
 }
 
-func (p *ProviderModel) methodDataToJSON() map[string]interface{} {
+func (p *ProviderModel) methodDataToJSON() (map[string]interface{}, error) {
 	var result map[string]interface{}
 	err := json.Unmarshal([]byte(p.MethodData), &result)
 
 	if err != nil {
-		fmt.Println("err")
+		return result, err
 	}
 
-	return result
+	return result, nil
 }
 
 func (p *ProviderModel) SetMethodDataReadableFromJsonString(methodData map[string]interface{}) {
@@ -50,11 +49,11 @@ func (p *ProviderModel) SetMethodDataReadableFromJsonString(methodData map[strin
 }
 
 func (p *ProviderModel) SetMethodDataReadableFromSelf() {
-	methodData := p.methodDataToJSON()
+	methodData, err := p.methodDataToJSON()
 
-	if p.Method == "telegram" {
-		p.MethodDataReadable = methodData["telegram_chat_id"].(string)
-	} else if p.Method == "web" {
-		p.MethodDataReadable = methodData["support_username"].(string) + ":" + methodData["support_password"].(string)
+	if err != nil {
+		p.MethodDataReadable = "-"
+	} else {
+		p.SetMethodDataReadableFromJsonString(methodData)
 	}
 }
