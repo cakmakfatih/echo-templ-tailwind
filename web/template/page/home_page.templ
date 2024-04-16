@@ -8,7 +8,7 @@ import (
 )
 
 templ HomePage(panels []*entity.PanelSession){
-    @layout.MainLayout("Panel") {
+    @layout.MainLayout("GSA - Panel") {
         if len(panels) == 0 {
             @form.AddPanelForm()
         } else {
