@@ -2,14 +2,23 @@ package template
 
 import (
     layout "gohtmx/web/template/layout"
-    component "gohtmx/web/template/component/form"
+    form "gohtmx/web/template/component/form"
+    static "gohtmx/web/template/component/static"
 	"gohtmx/internal/entity"
 )
 
 templ HomePage(panels []*entity.PanelSession){
     @layout.MainLayout("Panel") {
         if len(panels) == 0 {
-            @component.AddPanelForm()
+            @form.AddPanelForm()
+        } else {
+            @static.AppHeader()
+            <main class="flex flex-1 min-h-0">
+                @static.Sidebar()
+                @layout.MainContent() {
+
+                }
+            </main>
         }
     }
 }
