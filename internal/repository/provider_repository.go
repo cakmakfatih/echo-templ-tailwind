@@ -12,6 +12,7 @@ import (
 type ProviderRepository interface {
 	Get(panels []*entity.PanelSession) ([]*model.ProviderModel, error)
 	Delete(providers []*model.ProviderModel) error
+	Update(provider *model.ProviderModel) error
 }
 
 type providerRepository struct {
@@ -62,6 +63,26 @@ func (r *providerRepository) Delete(providers []*model.ProviderModel) error {
 		dbx.In(
 			"id",
 			providerIds...,
+		),
+	).Execute()
+
+	return err
+}
+
+func (r *providerRepository) Update(provider *model.ProviderModel) error {
+	_, err := r.db.Dao.DB().Update(
+		r.tableName(),
+		dbx.Params{
+			"url":         provider.Url,
+			"alias":       provider.Alias,
+			"method":      provider.Method,
+			"method_data": provider.MethodData,
+		},
+		dbx.NewExp(
+			"id = {:id}",
+			dbx.Params{
+				"id": provider.Id,
+			},
 		),
 	).Execute()
 
