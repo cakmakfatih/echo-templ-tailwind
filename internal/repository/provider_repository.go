@@ -11,6 +11,7 @@ import (
 
 type ProviderRepository interface {
 	Get(panels []*entity.PanelSession) ([]*model.ProviderModel, error)
+	Delete(providers []*model.ProviderModel) error
 }
 
 type providerRepository struct {
