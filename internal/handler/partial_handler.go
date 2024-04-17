@@ -30,7 +30,7 @@ func NewPartialHandler(logger *logging.Logger, providerRepository *repository.Pr
 
 func (h *partialHandler) GetProvidersFragment(c echo.Context) error {
 	panels := c.Get("panels").([]*entity.PanelSession)
-	providers, err := (*h.providerRepository).GetProviders(panels)
+	providers, err := (*h.providerRepository).Get(panels)
 
 	if err != nil {
 		return nil

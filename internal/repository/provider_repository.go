@@ -10,7 +10,7 @@ import (
 )
 
 type ProviderRepository interface {
-	GetProviders(panels []*entity.PanelSession) ([]*model.ProviderModel, error)
+	Get(panels []*entity.PanelSession) ([]*model.ProviderModel, error)
 }
 
 type providerRepository struct {
@@ -29,7 +29,7 @@ func (*providerRepository) tableName() string {
 	return "providers"
 }
 
-func (r *providerRepository) GetProviders(panels []*entity.PanelSession) ([]*model.ProviderModel, error) {
+func (r *providerRepository) Get(panels []*entity.PanelSession) ([]*model.ProviderModel, error) {
 	var panelIds []interface{}
 	var providers []*model.ProviderModel
 
