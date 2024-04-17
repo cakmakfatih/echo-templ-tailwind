@@ -3,7 +3,7 @@ package template
 import "gohtmx/util"
 
 templ TableRow(rowData *util.TableRowData) {
-    <div class="tr" hx-target="#editProviderForm" hx-swap="outerHTML" hx-get={`/partials/providers/` + rowData.Values[0]} @click="$dispatch('toggle-modal', 'toggle-edit-record'); $dispatch('toggle-edit-record')">
+    <div class="tr" @click="$dispatch('toggle-modal', 'toggle-edit-record-modal'); $dispatch('toggle-edit-record-modal');">
         <label class="td" for={`checkbox-` + rowData.Values[0]}>
             <input @change={`$dispatch('toggle-mark-for-delete', { id: ` + `'` + rowData.Values[0] + `'` + `, isChecked: $event.target.checked })`} id={`checkbox-` + rowData.Values[0]} name={`checkbox-` + rowData.Values[0]} type="checkbox" />
         </label>

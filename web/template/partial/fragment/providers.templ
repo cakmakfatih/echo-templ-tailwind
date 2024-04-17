@@ -26,6 +26,12 @@ templ Providers(panels []*entity.PanelSession, providers []*model.ProviderModel)
         ) {
             @form.ProviderForm(panels)
         }
+        @modal.SideModal(
+            modal.SideModalHeader("Edit Provider"), 
+            "edit-record",
+        ) {
+            @form.ProviderForm(panels)
+        }
         @dynamic.Table(util.ProvidersToTableData(providers))
         <form id="markedForDeletion"  hx-swap-oob="true" x-cloak x-data="{ idsToDelete: [], deleteHref: 'provider' }" 
             x-show="idsToDelete.length > 0"
