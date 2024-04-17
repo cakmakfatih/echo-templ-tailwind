@@ -10,7 +10,8 @@ import (
 )
 
 type ServiceRepository interface {
-	GetServices(panels []*entity.PanelSession) ([]*model.ServiceModel, error)
+	Get(panels []*entity.PanelSession) ([]*model.ServiceModel, error)
+	GetFromProvider(provider *model.ProviderModel) ([]*model.ServiceModel, error)
 }
 
 type serviceRepository struct {
@@ -56,7 +57,7 @@ func (r *serviceRepository) Create(form *ServiceCreateForm) (*model.ServiceModel
 	return serviceModel, nil
 }
 
-func (r *serviceRepository) GetServices(panels []*entity.PanelSession) ([]*model.ServiceModel, error) {
+func (r *serviceRepository) Get(panels []*entity.PanelSession) ([]*model.ServiceModel, error) {
 	var panelIds []interface{}
 	var services []*model.ServiceModel
 
@@ -67,6 +68,21 @@ func (r *serviceRepository) GetServices(panels []*entity.PanelSession) ([]*model
 	err := r.db.Dao.DB().Select("`services`.*").
 		From(r.tableName()).
 		Join("INNER JOIN", "providers", dbx.In("providers.panel", panelIds...)).
+		All(&services)
+
+	if err != nil {
+		return services, err
+	}
+
+	return services, nil
+}
+
+func (r *serviceRepository) GetFromProvider(provider *model.ProviderModel) ([]*model.ServiceModel, error) {
+	var services []*model.ServiceModel
+
+	err := r.db.Dao.DB().Select("*").
+		From(r.tableName()).
+		Where(dbx.NewExp("provider = {:provider_id}", dbx.Params{"provider_id": provider.Id})).
 		All(&services)
 
 	if err != nil {

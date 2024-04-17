@@ -27,9 +27,11 @@ func NewServiceHandler(logger *logging.Logger, serviceRepository *repository.Ser
 
 func (h *serviceHandler) Get(c echo.Context) error {
 	panels := c.Get("panels").([]*entity.PanelSession)
-	_, err := (*h.serviceRepository).GetServices(panels)
+	_, err := (*h.serviceRepository).Get(panels)
 
 	if err != nil {
+		(*h.logger).Warn("Error occurred on serviceHandler/get")
+		(*h.logger).Warn(err.Error())
 		return c.NoContent(http.StatusInternalServerError)
 	}
 
