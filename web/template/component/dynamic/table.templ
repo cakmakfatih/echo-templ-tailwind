@@ -3,29 +3,31 @@ package template
 import "gohtmx/util"
 
 templ Table(tableData *util.TableData) {
-    <div class="flex flex-col flex-1 overflow-x-auto min-h-0">
-        <div class="table">
-            <div class="theader">
-                <div class="tr font-semibold">
-                    <div class="td">
-                        <label class="hidden" for="headerCheckbox"></label>
-                        <input id="headerCheckbox" name="headerCheckbox" class="invisible" type="checkbox" disabled />
-                    </div>
-                    for idx, v := range tableData.Header {
-                        <div class={`td ` + tableData.SizeClasses[idx]}>
-                            <span>{v}</span>
+    <section class="flex flex-col flex-1 bg-white min-h-0">
+        <div class="flex flex-col flex-1 overflow-x-auto min-h-0">
+            <div class="table">
+                <div class="theader">
+                    <div class="tr font-semibold">
+                        <div class="td">
+                            <label class="hidden" for="headerCheckbox"></label>
+                            <input id="headerCheckbox" name="headerCheckbox" class="invisible" type="checkbox" disabled />
                         </div>
+                        for idx, v := range tableData.Header {
+                            <div class={`td ` + tableData.SizeClasses[idx]}>
+                                <span>{v}</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div id="mainTableBody" class="tbody divide-solid divide-y">
+                    for _, row := range tableData.Rows {
+                        @TableRow(&util.TableRowData{
+                            SizeClasses: tableData.SizeClasses,
+                            Values: row,
+                        })
                     }
                 </div>
             </div>
-            <div id="mainTableBody" class="tbody divide-solid divide-y">
-                for _, row := range tableData.Rows {
-                    @TableRow(&util.TableRowData{
-                        SizeClasses: tableData.SizeClasses,
-                        Values: row,
-                    })
-                }
-            </div>
         </div>
-    </div>
+    </section>
 }

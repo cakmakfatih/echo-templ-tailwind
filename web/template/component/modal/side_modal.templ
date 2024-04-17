@@ -1,0 +1,11 @@
+package template
+
+import "fmt"
+
+templ SideModal(header templ.Component, id string) {
+    <div id={fmt.Sprintf("%v-modal", id)} x-cloak x-data="{ open: false }" {templ.Attributes{fmt.Sprintf("@toggle-%v-modal.window", id): "open = !open; callback = true;"}...} :class="open ? 'add-record w-35p' : 'add-record w-0'">
+        @header
+        <hr />
+        { children... }
+    </div>
+}

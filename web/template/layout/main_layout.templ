@@ -27,6 +27,7 @@ templ MainLayout(title string) {
 			{ children... }
 			<form id="markedForDeletion" hx-swap="outerHTML">
 			</form>
+			<div id="overlay" x-cloak x-data="{ open: false, opennedWindowEvent: '' }" x-show="open" @click="open = false; $dispatch(opennedWindowEvent);" @toggle-modal.window="open = !open; opennedWindowEvent = $event.detail; callback = true;" class="bg-black/[0.34] absolute left-0 top-0 h-full w-full z-5"></div>
 		</body>
 	</html>
 }

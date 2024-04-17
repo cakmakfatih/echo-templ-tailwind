@@ -16,6 +16,7 @@ import (
 	"gohtmx/util"
 	dynamic "gohtmx/web/template/component/dynamic"
 	form "gohtmx/web/template/component/form"
+	modal "gohtmx/web/template/component/modal"
 	layout "gohtmx/web/template/layout"
 )
 
@@ -68,7 +69,7 @@ func Providers(panels []*entity.PanelSession, providers []*model.ProviderModel) 
 				}
 				return templ_7745c5c3_Err
 			})
-			templ_7745c5c3_Err = dynamic.PanelHeader("Providers", "Search by URL", "/partials").Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = dynamic.PanelHeader("Providers", "Search by URL", "/provider").Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -82,7 +83,7 @@ func Providers(panels []*entity.PanelSession, providers []*model.ProviderModel) 
 					templ_7745c5c3_Buffer = templ.GetBuffer()
 					defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 				}
-				templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 3)
+				templ_7745c5c3_Err = form.ProviderForm(panels).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -91,11 +92,14 @@ func Providers(panels []*entity.PanelSession, providers []*model.ProviderModel) 
 				}
 				return templ_7745c5c3_Err
 			})
-			templ_7745c5c3_Err = form.ProviderForm(panels).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = modal.SideModal(
+				modal.SideModalHeader("New Provider"),
+				"add-record",
+			).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 4)
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 3)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -103,7 +107,7 @@ func Providers(panels []*entity.PanelSession, providers []*model.ProviderModel) 
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 5)
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 4)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
