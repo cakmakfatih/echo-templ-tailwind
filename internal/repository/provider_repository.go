@@ -48,3 +48,21 @@ func (r *providerRepository) Get(panels []*entity.PanelSession) ([]*model.Provid
 
 	return providers, nil
 }
+
+func (r *providerRepository) Delete(providers []*model.ProviderModel) error {
+	var providerIds []interface{}
+
+	for _, provider := range providers {
+		providerIds = append(providerIds, provider.Id)
+	}
+
+	_, err := r.db.Dao.DB().Delete(
+		r.tableName(),
+		dbx.In(
+			"id",
+			providerIds...,
+		),
+	).Execute()
+
+	return err
+}
