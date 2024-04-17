@@ -22,7 +22,7 @@ type ProviderModel struct {
 	Alias              string `db:"alias"`
 	Method             Method `db:"method"`
 	MethodData         string `db:"method_data"`
-	MethodDataReadable string `json:"-"`
+	MethodDataReadable string `db:"-"`
 }
 
 func (*ProviderModel) TableName() string {
