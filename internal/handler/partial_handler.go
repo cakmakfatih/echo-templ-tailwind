@@ -14,17 +14,20 @@ import (
 
 type PartialHandler interface {
 	GetProvidersFragment(c echo.Context) error
+	GetServicesOfProvider(c echo.Context) error
 }
 
 type partialHandler struct {
 	logger             *logging.Logger
 	providerRepository *repository.ProviderRepository
+	serviceRepository  *repository.ServiceRepository
 }
 
-func NewPartialHandler(logger *logging.Logger, providerRepository *repository.ProviderRepository) PartialHandler {
+func NewPartialHandler(logger *logging.Logger, providerRepository *repository.ProviderRepository, serviceRepository *repository.ServiceRepository) PartialHandler {
 	return &partialHandler{
 		logger:             logger,
 		providerRepository: providerRepository,
+		serviceRepository:  serviceRepository,
 	}
 }
 
@@ -37,4 +40,20 @@ func (h *partialHandler) GetProvidersFragment(c echo.Context) error {
 	}
 
 	return util.Render(c, http.StatusOK, fragment.Providers(panels, providers))
+}
+
+func (h *partialHandler) GetServicesOfProvider(c echo.Context) error {
+	providerId := c.Param("providerId")
+
+	if providerId == "" {
+		return c.NoContent(http.StatusBadRequest)
+	}
+
+	_, err := (*h.serviceRepository).GetFromProvider(providerId)
+
+	if err != nil {
+		return nil
+	}
+
+	return c.NoContent(http.StatusOK)
 }

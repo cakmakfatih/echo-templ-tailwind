@@ -17,12 +17,13 @@ const (
 
 type ProviderModel struct {
 	models.BaseModel
-	Panel              string `db:"panel"`
-	Url                string `db:"url"`
-	Alias              string `db:"alias"`
-	Method             Method `db:"method"`
-	MethodData         string `db:"method_data"`
-	MethodDataReadable string `db:"-"`
+	Panel              string                 `db:"panel"`
+	Url                string                 `db:"url"`
+	Alias              string                 `db:"alias"`
+	Method             Method                 `db:"method"`
+	MethodData         string                 `db:"method_data"`
+	MethodDataReadable string                 `db:"-"`
+	MethodDataJSON     map[string]interface{} `db:"-"`
 }
 
 func (*ProviderModel) TableName() string {
@@ -36,6 +37,8 @@ func (p *ProviderModel) methodDataToJSON() (map[string]interface{}, error) {
 	if err != nil {
 		return result, err
 	}
+
+	p.MethodDataJSON = result
 
 	return result, nil
 }

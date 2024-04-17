@@ -11,7 +11,7 @@ import (
 
 type ServiceRepository interface {
 	Get(panels []*entity.PanelSession) ([]*model.ServiceModel, error)
-	GetFromProvider(provider *model.ProviderModel) ([]*model.ServiceModel, error)
+	GetFromProvider(providerId string) ([]*model.ServiceModel, error)
 }
 
 type serviceRepository struct {
@@ -77,12 +77,12 @@ func (r *serviceRepository) Get(panels []*entity.PanelSession) ([]*model.Service
 	return services, nil
 }
 
-func (r *serviceRepository) GetFromProvider(provider *model.ProviderModel) ([]*model.ServiceModel, error) {
+func (r *serviceRepository) GetFromProvider(providerId string) ([]*model.ServiceModel, error) {
 	var services []*model.ServiceModel
 
 	err := r.db.Dao.DB().Select("*").
 		From(r.tableName()).
-		Where(dbx.NewExp("provider = {:provider_id}", dbx.Params{"provider_id": provider.Id})).
+		Where(dbx.NewExp("provider = {:provider_id}", dbx.Params{"provider_id": providerId})).
 		All(&services)
 
 	if err != nil {
