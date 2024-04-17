@@ -11,7 +11,7 @@ import (
 
 type ProviderRepository interface {
 	Get(panels []*entity.PanelSession) ([]*model.ProviderModel, error)
-	Delete(providers []*model.ProviderModel) error
+	Delete(ids []string) error
 	Update(provider *model.ProviderModel) error
 }
 
@@ -51,11 +51,11 @@ func (r *providerRepository) Get(panels []*entity.PanelSession) ([]*model.Provid
 	return providers, nil
 }
 
-func (r *providerRepository) Delete(providers []*model.ProviderModel) error {
+func (r *providerRepository) Delete(ids []string) error {
 	var providerIds []interface{}
 
-	for _, provider := range providers {
-		providerIds = append(providerIds, provider.Id)
+	for _, id := range ids {
+		providerIds = append(providerIds, id)
 	}
 
 	_, err := r.db.Dao.DB().Delete(
