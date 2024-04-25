@@ -3,4 +3,5 @@ tmp/
 *.txt
 pb_data/
 .vscode/
-fleet/
+.fleet/
+.idea/
