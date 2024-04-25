@@ -55,7 +55,6 @@ func NewDB() *DB {
 
 		if err != nil {
 			fmt.Println("could not serve db")
-
 			panic(err)
 		}
 	}()

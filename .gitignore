@@ -2,3 +2,5 @@
 tmp/
 *.txt
 pb_data/
+.vscode/
+fleet/
