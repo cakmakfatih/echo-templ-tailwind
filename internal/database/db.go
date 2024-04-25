@@ -1,6 +1,7 @@
 package database
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/pocketbase/dbx"
@@ -20,24 +21,44 @@ func NewDB() *DB {
 	db := &DB{}
 
 	db.App = pocketbase.New()
-	db.App.Bootstrap()
+	err := db.App.Bootstrap()
+
+	if err != nil {
+		fmt.Println("could not bootstrap db")
+		panic(err)
+	}
 
 	serveCommand := cmd.NewServeCommand(db.App, false)
 	builder := db.App.Dao().DB()
+
 	db.Dao = daos.New(builder)
 
-	migrations.Register(func(builder dbx.Builder) error {
+	migrations.Register(func(db dbx.Builder) error {
+		dao := daos.New(db)
 		admin := models.Admin{}
 
 		admin.Email = os.Getenv("PB_ADMIN_EMAIL")
-		admin.SetPassword(os.Getenv("PB_ADMIN_PASSWORD"))
+		err := admin.SetPassword(os.Getenv("PB_ADMIN_PASSWORD"))
 
-		return db.Dao.Save(&admin)
+		if err != nil {
+			fmt.Println("could not set admin password on migration")
+			panic(err)
+		}
+
+		return dao.Save(&admin)
 	}, func(builder dbx.Builder) error {
 		return nil
 	})
 
-	go serveCommand.Execute()
+	go func() {
+		err := serveCommand.Execute()
+
+		if err != nil {
+			fmt.Println("could not serve db")
+
+			panic(err)
+		}
+	}()
 
 	return db
 }

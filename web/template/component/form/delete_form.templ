@@ -1,0 +1,19 @@
+package template
+
+templ DeleteForm() {
+    <form id="markedForDeletion"  hx-swap-oob="true" x-cloak x-data="{ idsToDelete: [], deleteHref: 'provider' }" 
+        x-show="idsToDelete.length > 0"
+        @change-delete-mark-type="deleteHref = $event.detail; idsToDelete = []; callback = true;"
+        @toggle-mark-for-delete.window="if ($event.detail.isChecked && idsToDelete.indexOf($event.detail.id) === -1) { idsToDelete = [...idsToDelete, $event.detail.id] } else if (!$event.detail.isChecked && idsToDelete.indexOf($event.detail.id) !== -1) { idsToDelete = idsToDelete.filter(i => i !== $event.detail.id) } callback = true;" 
+        class="absolute itemx-center shadow-lg border px-4 py-2 flex self-center rounded-sm z-5 bottom-4 justify-self-end text-wider bg-blue-400 text-white"
+        style="display: none;"
+        >
+        <span x-text="idsToDelete.length" class="self-center"></span>
+        <span class="self-center">&nbsp;item(s) are selected</span>
+        <span class="flex-1"></span>
+        <input type="hidden" name="ids" :value="idsToDelete" />
+        <button :hx-delete="'/partial/' + deleteHref" hx-params="*" type="button" class="bg-red-500 hover:bg-red-600 active:bg-red-700 transition-colors duration-100 cursor-pointer px-4 py-2 ml-4 font-semibold rounded-md">
+            DELETE
+        </button>
+    </form>
+}
