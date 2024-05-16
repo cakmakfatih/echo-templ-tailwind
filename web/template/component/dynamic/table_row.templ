@@ -4,15 +4,15 @@ import "gohtmx/util"
 
 templ TableRow(rowData *util.TableRowData) {
     <div class="tr" @click="$dispatch('toggle-modal', 'toggle-edit-record-modal'); $dispatch('toggle-edit-record-modal');">
-        <label class="td" for={`checkbox-` + rowData.Values[0]}>
+        <label class="td" for={`checkbox-` + rowData.Values[0]} @click="$event.stopPropagation();">
             <input @change={`$dispatch('toggle-mark-for-delete', { id: ` + `'` + rowData.Values[0] + `'` + `, isChecked: $event.target.checked })`} id={`checkbox-` + rowData.Values[0]} name={`checkbox-` + rowData.Values[0]} type="checkbox" />
         </label>
         for idx, v := range rowData.Values {
             <div class={`td ` + rowData.SizeClasses[idx]}>
                 if v == "" {
-                    <span>-</span>
+                    <span class="w-full">-</span>
                 } else {
-                    <span>{ v }</span>
+                    <span class="w-full text-ellipsis overflow-hidden">{ v }</span>
                 }
             </div>
         }

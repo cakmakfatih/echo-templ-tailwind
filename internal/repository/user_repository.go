@@ -37,7 +37,7 @@ func (r *userRepository) AuthenticateWithEmailAndPassword(creds *LoginForm) (*mo
 	(*r.logger).Info("User is authenticating with email and password")
 	authRecord, err := r.db.Dao.FindAuthRecordByEmail(r.tableName(), creds.Email)
 
-	if err == sql.ErrNoRows {
+	if errors.Is(err, sql.ErrNoRows) {
 		return nil, errors.New("incorrect username or password")
 	} else if err != nil {
 		return nil, err

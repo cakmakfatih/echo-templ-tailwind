@@ -27,12 +27,12 @@ func addForm(panels []*entity.PanelSession) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form id=\"add-provider-form\" onkeydown=\"return event.key != &#39;Enter&#39;;\" hx-disinherit=\"*\" hx-swap=\"none\" class=\"min-h-0 flex flex-1 flex-col px-6 py-4\" x-data=\"{ panel: &#39;&#39;, form: $el }\"><label for=\"panel\" class=\"font-semibold px-3 py-1 text-sm\">Panel (*)</label> <select x-model=\"panel\" id=\"panel\" name=\"panel\" class=\"transition-colors block px-2 py-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\">")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 1)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		for _, panel := range panels {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<option value=\"")
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 2)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -45,7 +45,7 @@ func addForm(panels []*entity.PanelSession) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 3)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -58,12 +58,12 @@ func addForm(panels []*entity.PanelSession) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</option>")
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 4)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</select><div class=\"flex flex-col self-stretch flex-1 min-h-0\" x-data=\"{ method: &#39;telegram&#39; }\"><label for=\"inpUrl\" class=\"mt-2 font-semibold px-3 py-1 text-sm\">URL (*)</label> <input autocomplete=\"off\" id=\"inpUrl\" name=\"url\" class=\"transition-colors block p-2 ps-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\" type=\"text\" placeholder=\"https://provider.com\" required> <label for=\"method\" class=\"mt-2 font-semibold px-3 py-1 text-sm\">Method (*)</label> <select x-model=\"method\" id=\"method\" name=\"method\" class=\"transition-colors block px-2 py-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\"><option value=\"telegram\">Telegram</option> <option value=\"web\">Web</option> <option value=\"whatsapp\">WhatsApp</option> <option value=\"manual\">Manual</option></select><div class=\"flex flex-col mt-2 method\" x-show=\"method === &#39;web&#39;\"><label for=\"supportUsername\" class=\"font-semibold px-3 py-1 text-sm\">Support Username (*)</label> <input :required=\"method === &#39;web&#39;\" autocomplete=\"off\" id=\"supportUsername\" name=\"supportUsername\" class=\"webInp transition-colors block p-2 ps-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\" type=\"text\" placeholder=\"Username\"> <label for=\"supportPassword\" class=\"mt-2 font-semibold px-3 py-1 text-sm\">Support Password (*)</label> <input :required=\"method === &#39;web&#39;\" autocomplete=\"off\" id=\"supportPassword\" name=\"supportPassword\" class=\"webInp transition-colors block p-2 ps-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\" type=\"text\" placeholder=\"********\"></div><div class=\"flex flex-col mt-2 method\" x-show=\"method === &#39;telegram&#39;\"><label for=\"telegramChatId\" class=\"mt-2 font-semibold px-3 py-1 text-sm\">Telegram Chat ID (*)</label> <input :required=\"method === &#39;telegram&#39;\" autocomplete=\"off\" id=\"telegramChatId\" name=\"telegramChatId\" class=\"webInp transition-colors block p-2 ps-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\" type=\"text\" placeholder=\"-104xxxx\"></div><label for=\"alias\" class=\"mt-2 font-semibold px-3 py-1 text-sm\">Alias</label> <input autocomplete=\"off\" id=\"alias\" name=\"alias\" class=\"transition-colors block p-2 ps-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\" type=\"text\" placeholder=\"Provider Name\"></div><button hx-post=\"/provider\" type=\"submit\" @click=\"$nextTick(() =&gt; { $dispatch(&#39;toggle-notification&#39;); setTimeout(() =&gt; { $dispatch(&#39;toggle-notification&#39;); }, 3500); })\" class=\"text-gray-600 bg-white border border-gray-500 items-center px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 active:bg-gray-200 transition-colors duration-150\"><span>Create</span></button></form>")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 5)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -87,7 +87,7 @@ func editForm(panels []*entity.PanelSession, provider *model.ProviderModel) temp
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form id=\"edit-provider-form\" onkeydown=\"return event.key != &#39;Enter&#39;;\" hx-disinherit=\"*\" hx-swap=\"none\" class=\"min-h-0 flex flex-1 flex-col px-6 py-4\"")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 6)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -95,12 +95,12 @@ func editForm(panels []*entity.PanelSession, provider *model.ProviderModel) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("><label for=\"panel\" class=\"font-semibold px-3 py-1 text-sm\">Panel (*)</label> <select x-model=\"panel\" id=\"panel\" name=\"panel\" class=\"transition-colors block px-2 py-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\">")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 7)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		for _, panel := range panels {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<option value=\"")
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 8)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -113,7 +113,7 @@ func editForm(panels []*entity.PanelSession, provider *model.ProviderModel) temp
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\">")
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 9)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -126,12 +126,12 @@ func editForm(panels []*entity.PanelSession, provider *model.ProviderModel) temp
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</option>")
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 10)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</select><div class=\"flex flex-col self-stretch flex-1 min-h-0\"")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 11)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -139,7 +139,7 @@ func editForm(panels []*entity.PanelSession, provider *model.ProviderModel) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("><label for=\"inpUrl\" class=\"mt-2 font-semibold px-3 py-1 text-sm\">URL (*)</label> <input autocomplete=\"off\" id=\"inpUrl\" name=\"url\" class=\"transition-colors block p-2 ps-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\" type=\"text\" placeholder=\"https://provider.com\" value=\"")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 12)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -152,7 +152,7 @@ func editForm(panels []*entity.PanelSession, provider *model.ProviderModel) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" required> <label for=\"method\" class=\"mt-2 font-semibold px-3 py-1 text-sm\">Method (*)</label> <select x-model=\"method\" id=\"method\" name=\"method\" class=\"transition-colors block px-2 py-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\"><option value=\"telegram\">Telegram</option> <option value=\"web\">Web</option> <option value=\"whatsapp\">WhatsApp</option> <option value=\"manual\">Manual</option></select><div class=\"flex flex-col mt-2 method\" x-show=\"method === &#39;web&#39;\"><label for=\"supportUsername\" class=\"font-semibold px-3 py-1 text-sm\">Support Username (*)</label> <input :required=\"method === &#39;web&#39;\" autocomplete=\"off\" id=\"supportUsername\" name=\"supportUsername\" class=\"webInp transition-colors block p-2 ps-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\" type=\"text\" placeholder=\"Username\" value=\"")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 13)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -165,7 +165,7 @@ func editForm(panels []*entity.PanelSession, provider *model.ProviderModel) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"> <label for=\"supportPassword\" class=\"mt-2 font-semibold px-3 py-1 text-sm\">Support Password (*)</label> <input :required=\"method === &#39;web&#39;\" autocomplete=\"off\" id=\"supportPassword\" name=\"supportPassword\" class=\"webInp transition-colors block p-2 ps-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\" type=\"text\" placeholder=\"********\" value=\"")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 14)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -178,7 +178,7 @@ func editForm(panels []*entity.PanelSession, provider *model.ProviderModel) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></div><div class=\"flex flex-col mt-2 method\" x-show=\"method === &#39;telegram&#39;\"><label for=\"telegramChatId\" class=\"mt-2 font-semibold px-3 py-1 text-sm\">Telegram Chat ID (*)</label> <input :required=\"method === &#39;telegram&#39;\" autocomplete=\"off\" id=\"telegramChatId\" name=\"telegramChatId\" class=\"webInp transition-colors block p-2 ps-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\" type=\"text\" placeholder=\"-104xxxx\" value=\"")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 15)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -191,7 +191,7 @@ func editForm(panels []*entity.PanelSession, provider *model.ProviderModel) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></div><label for=\"alias\" class=\"mt-2 font-semibold px-3 py-1 text-sm\">Alias</label> <input autocomplete=\"off\" value=\"")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 16)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -204,7 +204,7 @@ func editForm(panels []*entity.PanelSession, provider *model.ProviderModel) temp
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" id=\"alias\" name=\"alias\" class=\"transition-colors block p-2 ps-3 text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:bg-white text-sm focus:border-gray-500 outline-none\" type=\"text\" placeholder=\"Provider Name\"></div><button hx-patch=\"/provider\" type=\"submit\" @click=\"$nextTick(() =&gt; { $dispatch(&#39;toggle-notification&#39;); setTimeout(() =&gt; { $dispatch(&#39;toggle-notification&#39;); }, 3500); })\" class=\"text-gray-600 bg-white border border-gray-500 items-center px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 active:bg-gray-200 transition-colors duration-150\"><span>Edit</span></button></form>")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 17)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

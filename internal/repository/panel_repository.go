@@ -75,7 +75,7 @@ func (r *panelRepository) Create(user *entity.UserSession, panelForm *PanelForm)
 		Where(dbx.NewExp("user = {:user_id}", dbx.Params{"user_id": user.Id})).
 		One(&panelModel)
 
-	if err != sql.ErrNoRows {
+	if !errors.Is(err, sql.ErrNoRows) {
 		return panelModel, errors.New("user already has a panel")
 	}
 

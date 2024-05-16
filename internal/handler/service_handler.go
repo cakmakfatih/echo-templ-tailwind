@@ -30,7 +30,6 @@ func (h *serviceHandler) Get(c echo.Context) error {
 	_, err := (*h.serviceRepository).Get(panels)
 
 	if err != nil {
-		(*h.logger).Warn("Error occurred on serviceHandler/get")
 		(*h.logger).Warn(err.Error())
 		return c.NoContent(http.StatusInternalServerError)
 	}

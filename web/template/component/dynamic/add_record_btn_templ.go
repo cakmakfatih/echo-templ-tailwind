@@ -23,7 +23,7 @@ func AddRecordBtn() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button @click=\"$dispatch(&#39;toggle-modal&#39;, &#39;toggle-add-record-modal&#39;); $dispatch(&#39;toggle-add-record-modal&#39;)\" type=\"button\" class=\"text-gray-600 bg-white border flex items-center px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-100 active:bg-gray-200 transition-colors duration-150\">")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 1)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -31,7 +31,7 @@ func AddRecordBtn() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</button>")
+		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 2)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

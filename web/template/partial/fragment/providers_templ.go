@@ -51,7 +51,7 @@ func Providers(panels []*entity.PanelSession, providers []*model.ProviderModel) 
 						templ_7745c5c3_Buffer = templ.GetBuffer()
 						defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 					}
-					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<svg class=\"w-7 h-7 mr-1\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z\"></path></svg> <span>New Provider</span>")
+					templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 1)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -73,7 +73,7 @@ func Providers(panels []*entity.PanelSession, providers []*model.ProviderModel) 
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" ")
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 2)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -99,7 +99,7 @@ func Providers(panels []*entity.PanelSession, providers []*model.ProviderModel) 
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" ")
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 3)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -125,7 +125,7 @@ func Providers(panels []*entity.PanelSession, providers []*model.ProviderModel) 
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" ")
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 4)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -133,7 +133,7 @@ func Providers(panels []*entity.PanelSession, providers []*model.ProviderModel) 
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" <form id=\"markedForDeletion\" hx-swap-oob=\"true\" x-cloak x-data=\"{ idsToDelete: [], deleteHref: &#39;provider&#39; }\" x-show=\"idsToDelete.length &gt; 0\" @change-delete-mark-type=\"deleteHref = $event.detail; idsToDelete = []; callback = true;\" @toggle-mark-for-delete.window=\"if ($event.detail.isChecked &amp;&amp; idsToDelete.indexOf($event.detail.id) === -1) { idsToDelete = [...idsToDelete, $event.detail.id] } else if (!$event.detail.isChecked &amp;&amp; idsToDelete.indexOf($event.detail.id) !== -1) { idsToDelete = idsToDelete.filter(i =&gt; i !== $event.detail.id) } callback = true;\" class=\"absolute itemx-center shadow-lg border px-4 py-2 flex self-center rounded-sm z-5 bottom-4 justify-self-end text-wider bg-blue-400 text-white\" style=\"display: none;\"><span x-text=\"idsToDelete.length\" class=\"self-center\"></span> <span class=\"self-center\">&nbsp;item(s) are selected</span> <span class=\"flex-1\"></span> <input type=\"hidden\" name=\"ids\" :value=\"idsToDelete\"> <button :hx-delete=\"&#39;/partial/&#39; + deleteHref\" hx-params=\"*\" type=\"button\" class=\"bg-red-500 hover:bg-red-600 active:bg-red-700 transition-colors duration-100 cursor-pointer px-4 py-2 ml-4 font-semibold rounded-md\">DELETE</button></form>")
+			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 5)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

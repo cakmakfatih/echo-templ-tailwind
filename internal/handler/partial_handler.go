@@ -36,7 +36,9 @@ func (h *partialHandler) GetProvidersFragment(c echo.Context) error {
 	providers, err := (*h.providerRepository).Get(panels)
 
 	if err != nil {
-		return nil
+		(*h.logger).Warn(err.Error())
+
+		return c.NoContent(http.StatusInternalServerError)
 	}
 
 	return util.Render(c, http.StatusOK, fragment.Providers(panels, providers))
@@ -52,7 +54,9 @@ func (h *partialHandler) GetServicesOfProvider(c echo.Context) error {
 	_, err := (*h.serviceRepository).GetFromProvider(providerId)
 
 	if err != nil {
-		return nil
+		(*h.logger).Warn(err.Error())
+
+		return c.NoContent(http.StatusInternalServerError)
 	}
 
 	return c.NoContent(http.StatusOK)

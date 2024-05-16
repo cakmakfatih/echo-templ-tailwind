@@ -46,7 +46,7 @@ func HomePage(panels []*entity.PanelSession) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" <main class=\"flex flex-1 min-h-0\">")
+				templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 1)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -54,7 +54,7 @@ func HomePage(panels []*entity.PanelSession) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<content id=\"pageView\" hx-swap=\"outerHTML\" hx-trigger=\"load\" hx-get=\"/partial/fragment/providers\" class=\"flex flex-col flex-1 min-h-0\"></content></main>")
+				templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 2)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

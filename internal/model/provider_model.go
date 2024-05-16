@@ -10,7 +10,7 @@ type Method string
 
 const (
 	WhatsApp Method = "whatsapp"
-	Telegram Method = "web"
+	Telegram Method = "telegram"
 	Web      Method = "web"
 	Manual   Method = "manual"
 )
